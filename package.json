@@ -1,0 +1,14 @@
+{
+	"name": "net.twinnovations.unity.collections",
+	"displayName": "TWI Collections",
+	"changelogUrl": "https://unity.twinnovations.net/packages/collections/changes.html",
+	"documentationUrl": "https://unity.twinnovations.net/packages/collections",
+	"version": "0.0.1",
+	"unity": "2021.3",
+	"unityRelease": "33f1",
+	"author": {
+		"name": "TW Innovations",
+		"email": "support+unity@twinnovations.net",
+		"url": "unity.twinnovations.net"
+	}
+}
