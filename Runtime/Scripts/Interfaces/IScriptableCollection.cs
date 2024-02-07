@@ -1,4 +1,4 @@
-namespace TWI.Collections.Interfaces
+namespace TWI.Collections
 {
     using System.Collections;
     using UnityEngine;

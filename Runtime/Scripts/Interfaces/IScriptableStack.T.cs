@@ -1,4 +1,4 @@
-namespace TWI.Collections.Interfaces
+namespace TWI.Collections
 {
     public interface IScriptableStack<T> : IScriptableCollection<T>, IScriptableStack
     {

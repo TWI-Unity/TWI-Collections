@@ -4,7 +4,6 @@ namespace TWI.Collections
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using TWI.Collections.Interfaces;
     using UnityEngine;
 
     public abstract class ScriptableList<T> : ScriptableObject, IScriptableList<T>

@@ -3,7 +3,6 @@ namespace TWI.Collections
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using TWI.Collections.Interfaces;
     using UnityEngine;
 
     public abstract class ScriptableQueue<T> : ScriptableObject, IScriptableQueue<T>

@@ -1,7 +1,6 @@
-namespace TWI.Collections.Interfaces
+namespace TWI.Collections
 {
     using System.Collections.Generic;
-    using UnityEngine;
 
     public interface IScriptableCollection<T> : IScriptableCollection, IReadOnlyCollection<T>
     {
