@@ -9,48 +9,48 @@ namespace TWI.Collections
     public abstract class ScriptableStack<T> : ScriptableObject, IScriptableStack<T>
     {
         [SerializeField]
-        private T[] _array;
-        private Stack<T> _collection;
+        private T[] _collection;
+        private Stack<T> _stack;
 
         #region IScriptableCollection<T>
 
-        public int Count => _collection.Count;
+        public int Count => _stack.Count;
 
-        bool ICollection.IsSynchronized => ((ICollection)_collection).IsSynchronized;
+        bool ICollection.IsSynchronized => ((ICollection)_stack).IsSynchronized;
 
-        object ICollection.SyncRoot => ((ICollection)_collection).SyncRoot;
+        object ICollection.SyncRoot => ((ICollection)_stack).SyncRoot;
 
-        public void Clear() => _collection.Clear();
-        public bool Contains(T item) => _collection.Contains(item);
-        void ICollection.CopyTo(Array array, int index) => ((ICollection)_collection).CopyTo(array, index);
-        public void CopyTo(T[] array, int arrayIndex) => _collection.CopyTo(array, arrayIndex);
+        public void Clear() => _stack.Clear();
+        public bool Contains(T item) => _stack.Contains(item);
+        void ICollection.CopyTo(Array array, int index) => ((ICollection)_stack).CopyTo(array, index);
+        public void CopyTo(T[] array, int arrayIndex) => _stack.CopyTo(array, arrayIndex);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        public IEnumerator<T> GetEnumerator() => _collection.GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => _stack.GetEnumerator();
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            _array ??= Array.Empty<T>();
-            _collection = new(_array);
-            _array = null;
+            _collection ??= Array.Empty<T>();
+            _stack = new(_collection);
+            _collection = null;
         }
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            _collection ??= new();
-            _array = _collection.ToArray();
+            _stack ??= new();
+            _collection = _stack.ToArray();
         }
 
-        public T[] ToArray() => _collection.ToArray();
-        public void TrimExcess() => _collection.TrimExcess();
+        public T[] ToArray() => _stack.ToArray();
+        public void TrimExcess() => _stack.TrimExcess();
 
         #endregion
         #region IScriptableCollection<T>
 
-        public T Peek() => _collection.Peek();
-        public T Pop() => _collection.Pop();
-        public void Push(T item) => _collection.Push(item);
-        public bool TryPeek(out T result) => _collection.TryPeek(out result);
-        public bool TryPop(out T result) => _collection.TryPop(out result);
+        public T Peek() => _stack.Peek();
+        public T Pop() => _stack.Pop();
+        public void Push(T item) => _stack.Push(item);
+        public bool TryPeek(out T result) => _stack.TryPeek(out result);
+        public bool TryPop(out T result) => _stack.TryPop(out result);
 
         #endregion
     }

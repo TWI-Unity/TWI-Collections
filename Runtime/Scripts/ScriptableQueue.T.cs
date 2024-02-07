@@ -9,48 +9,48 @@ namespace TWI.Collections
     public abstract class ScriptableQueue<T> : ScriptableObject, IScriptableQueue<T>
     {
         [SerializeField]
-        private T[] _array;
-        private Queue<T> _collection;
+        private T[] _collection;
+        private Queue<T> _queue;
 
         #region IScriptableCollection<T>
 
-        public int Count => _collection.Count;
+        public int Count => _queue.Count;
 
-        bool ICollection.IsSynchronized => ((ICollection)_collection).IsSynchronized;
+        bool ICollection.IsSynchronized => ((ICollection)_queue).IsSynchronized;
 
-        object ICollection.SyncRoot => ((ICollection)_collection).SyncRoot;
+        object ICollection.SyncRoot => ((ICollection)_queue).SyncRoot;
 
-        public void Clear() => _collection.Clear();
-        public bool Contains(T item) => _collection.Contains(item);
-        void ICollection.CopyTo(Array array, int index) => ((ICollection)_collection).CopyTo(array, index);
-        public void CopyTo(T[] array, int arrayIndex) => _collection.CopyTo(array, arrayIndex);
+        public void Clear() => _queue.Clear();
+        public bool Contains(T item) => _queue.Contains(item);
+        void ICollection.CopyTo(Array array, int index) => ((ICollection)_queue).CopyTo(array, index);
+        public void CopyTo(T[] array, int arrayIndex) => _queue.CopyTo(array, arrayIndex);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        public IEnumerator<T> GetEnumerator() => _collection.GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => _queue.GetEnumerator();
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            _array ??= Array.Empty<T>();
-            _collection = new(_array);
-            _array = null;
+            _collection ??= Array.Empty<T>();
+            _queue = new(_collection);
+            _collection = null;
         }
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            _collection ??= new();
-            _array = _collection.ToArray();
+            _queue ??= new();
+            _collection = _queue.ToArray();
         }
 
-        public T[] ToArray() => _collection.ToArray();
-        public void TrimExcess() => _collection.TrimExcess();
+        public T[] ToArray() => _queue.ToArray();
+        public void TrimExcess() => _queue.TrimExcess();
 
         #endregion
         #region IScriptableQueue<T>
 
-        public T Dequeue() => _collection.Dequeue();
-        public void Enqueue(T item) => _collection.Enqueue(item);
-        public T Peek() => _collection.Peek();
-        public bool TryDequeue(out T result) => _collection.TryDequeue(out result);
-        public bool TryPeek(out T result) => _collection.TryPeek(out result);
+        public T Dequeue() => _queue.Dequeue();
+        public void Enqueue(T item) => _queue.Enqueue(item);
+        public T Peek() => _queue.Peek();
+        public bool TryDequeue(out T result) => _queue.TryDequeue(out result);
+        public bool TryPeek(out T result) => _queue.TryPeek(out result);
 
         #endregion
     }
